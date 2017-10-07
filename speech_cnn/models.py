@@ -11,7 +11,7 @@ from tflearn.layers.estimator import regression
 
 # Create model
 # Param : dropout value , learning rate , input shape
-def create_model(learning_rate, input_shape, nb_classes, base_path, drop=0.0):
+def create_model(learning_rate, input_shape, nb_classes, base_path, drop=1):
     network = input_data(shape=input_shape, name='input')
     network = conv_2d(network, 64, [4, 16], activation='relu')
     # network = max_pool_2d(network, 2)
