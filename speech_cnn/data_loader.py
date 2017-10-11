@@ -173,6 +173,7 @@ def mfcc_batch_generator(batch_size=10, source=Source.DIGIT_WAVES, target=Target
     if target == Target.speaker: speakers = get_speakers()
     batch_features = []
     labels = []
+    path = "data/test_erwan/"
     files = os.listdir(path)
     while True:
         print("loaded batch of %d files" % len(files))

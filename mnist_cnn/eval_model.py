@@ -5,7 +5,8 @@ from __future__ import print_function
 import os.path
 
 import numpy as npy
-import data_loader as data
+import tflearn.datasets.mnist as mnist
+
 import models
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -14,22 +15,16 @@ dir = os.path.dirname(__file__)
 
 def init():
     learning_rate = 0.01
-    batch_size = 6
-    # Inputs shaping
-    width = 20  # mfcc featu
-    height = 80  # (max) length of utterance
     classes = 10  # digits
-    input_shape = [-1, width, height, 1]
 
     # Fetch inputs
-    batch = data.mfcc_batch_generator(batch_size,isPlaySound=True)
-    testX, testY = next(batch)
-    testX = npy.reshape(testX, input_shape)
+    X, Y,testX, testY = mnist.load_data(one_hot=True)
+    testX = testX.reshape([-1, 28, 28, 1])
 
     # Instantiante model for testing
-    model = models.create_model(learning_rate, [None, width, height, 1], classes, dir)
+    model = models.create_model(learning_rate, [None, 28, 28, 1], 10, dir)
 
-    model.load(dir + "/checkpoints/step-17000")
+    model.load(dir + "/checkpoints/step-17200")
     evaluate_model_accuracy(model, testX, testY)
 
 
@@ -46,12 +41,10 @@ def evaluate_model_accuracy(model, X, Y):
         pred = npy.argmax(prediction[0])
         i = i + 1
         if (label == pred):
-            print("Predicted :" + str(pred))
-            print("Real :" + str(label))
             good_ = good_ + 1
     print("Accuracy test batch size :" + str(batch_size))
     print("Total good reco :" + str(good_))
-    print("Reco avg: %s " % str(round((good_ * 100) / (batch_size))) + "%")
+    print("Reco avg: %s " % str(((good_ * 100) / (batch_size))) + "%")
 
 
 if __name__ == "__main__":
