@@ -15,7 +15,7 @@ def create_model(learning_rate, input_shape, nb_classes, base_path, drop=1):
     network = input_data(shape=input_shape, name='input')
     network = conv_2d(network, 64, [4, 16], activation='relu')
     # network = max_pool_2d(network, 2)
-    network = local_response_normalization(network)
+    # network = local_response_normalization(network)
     # network = conv_2d(network, 64, [2, 8], activation='relu')
     # network = max_pool_2d(network, 2)
     # network = local_response_normalization(network)
