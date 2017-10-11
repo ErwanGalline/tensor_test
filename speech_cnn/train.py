@@ -10,7 +10,7 @@ import models
 import time
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-dir = os.path.dirname(__file__)
+dir = os.path.dirname(os.path.realpath(__file__))
 
 
 def init():
@@ -37,12 +37,13 @@ def init():
 
     # Instantiante model for training
     model = models.create_model(learning_rate, [None, width, height, 1], classes, dir, drop=dropout)
-
     model.load(dir + checkpoint_file)
+
     print("::::::::::::::::::::::::::::::::::::::::::::::::")
     print(":::Training started : CNN for speech recognition")
-    print("::: Run id : " + str(run_id))
-    print(":::Model loaded  : " + str(checkpoint_file))
+    print(":::Base dir : " + str(dir))
+    print(":::Run id : " + str(run_id))
+    print(":::Model loaded (full path) : " + str(dir + checkpoint_file))
     print(":::Learning rate : " + str(learning_rate))
     print(":::Drop out : " + str(dropout))
     print("::::::::::::::::::::::::::::::::::::::::::::::::")
