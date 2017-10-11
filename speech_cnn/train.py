@@ -47,6 +47,7 @@ def init():
     print(":::Learning rate : " + str(learning_rate))
     print(":::Drop out : " + str(dropout))
     print("::::::::::::::::::::::::::::::::::::::::::::::::")
+    
 
     # evaluate_model_accuracy(model, testX, testY)
     model.fit({'input': X}, {'target': Y}, n_epoch=epoch, validation_set=None,
