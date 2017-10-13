@@ -22,14 +22,13 @@ def init():
     input_shape = [-1, width, height, 1]
 
     # Fetch inputs
-    batch = data.mfcc_batch_generator(batch_size,is_play_sound=True, dir_path="data/spoken_numbers_pcm/")
+    batch = data.mfcc_batch_generator(batch_size, dir_path="data/spoken_numbers_pcm/")
     testX, testY = next(batch)
     testX = npy.reshape(testX, input_shape)
 
     # Instantiante model for testing
-    model = models.create_model(learning_rate, [None, width, height, 1], classes, dir)
-
-    model.load(dir + "/checkpoints/step-11000")
+    model = models.create_model(learning_rate, [None, width, height, 1], classes, dir, model_type="1conv")
+    model.load(dir + "/checkpoints_model_1/step-1000")
     evaluate_model_accuracy(model, testX, testY)
 
 
