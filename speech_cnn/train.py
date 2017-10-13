@@ -14,13 +14,13 @@ dir = os.path.dirname(os.path.realpath(__file__))
 
 
 def init():
-    dropout = 0.6
-    learning_rate = 0.0005
+    dropout = 0.7
+    learning_rate = 0.001
     snapshot_step = 500  # steps to snapshot
     epoch = 200000
     batch_size = 2400
     run_id = 'speech_cnn_' + str(int(time.time()))
-    checkpoint_file = "/checkpoints/step-21000"
+    checkpoint_file = "/checkpoints/step-8500"
 
     # Inputs shaping
     width = 20  # mfcc featu

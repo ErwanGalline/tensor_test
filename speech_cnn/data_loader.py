@@ -10,7 +10,6 @@ import numpy
 import numpy as np
 import skimage.io  # scikit-image
 import librosa
-import matplotlib
 # try:
 #
 # except:
@@ -168,19 +167,21 @@ def spectro_batch_generator(batch_size=10, width=64, source_data=Source.DIGIT_SP
                 labels = []
 
 
-def mfcc_batch_generator(batch_size=10, source=Source.DIGIT_WAVES, target=Target.digits, isPlaySound=False):
+def mfcc_batch_generator(batch_size=10, source=Source.DIGIT_WAVES, target=Target.digits,
+                         is_play_sound=False, dir_path=path):
     maybe_download(source, DATA_DIR)
     if target == Target.speaker: speakers = get_speakers()
     batch_features = []
     labels = []
-    files = os.listdir(path)
+    path = dir_path
+    files = os.listdir(dir_path)
     while True:
         print("loaded batch of %d files" % len(files))
         shuffle(files)
         for wav in files:
             if not wav.endswith(".wav"): continue
             wave, sr = librosa.load(path + wav, mono=True)
-            if isPlaySound:
+            if is_play_sound:
                 os.system("aplay " + path + wav)
             if target == Target.speaker:
                 label = one_hot_from_item(speaker(wav), speakers)

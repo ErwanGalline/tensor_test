@@ -28,3 +28,9 @@ speech_cnn/data/
 speech_cnn/tflearn_logs/
 
 *.pyc
+
+speech_cnn/logs_train\.txt
+
+speech_cnn/\.models_desc\.txt\.swp
+
+speech_cnn/checkpoints_model_1/

@@ -14,7 +14,7 @@ dir = os.path.dirname(__file__)
 
 def init():
     learning_rate = 0.01
-    batch_size = 6
+    batch_size = 5
     # Inputs shaping
     width = 20  # mfcc featu
     height = 80  # (max) length of utterance
@@ -22,14 +22,14 @@ def init():
     input_shape = [-1, width, height, 1]
 
     # Fetch inputs
-    batch = data.mfcc_batch_generator(batch_size,isPlaySound=True)
+    batch = data.mfcc_batch_generator(batch_size,is_play_sound=True, dir_path="data/spoken_numbers_pcm/")
     testX, testY = next(batch)
     testX = npy.reshape(testX, input_shape)
 
     # Instantiante model for testing
     model = models.create_model(learning_rate, [None, width, height, 1], classes, dir)
 
-    model.load(dir + "/checkpoints/step-17000")
+    model.load(dir + "/checkpoints/step-11000")
     evaluate_model_accuracy(model, testX, testY)
 
 
